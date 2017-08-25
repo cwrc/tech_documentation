@@ -217,3 +217,50 @@ sed 's%/\([^/]*\)$%/\1](\1)%' /tmp/z > /tmp/zzzzz
 grep -R 'url = ' */.git/config
 
 
+### Authentication against APIs
+
+CWRC uses the Drupal "Services" and "Rest Server"
+ 
+```
+curl -X POST -i -H "Content-type: application/json" -c cookies.txt -b cookies.txt -X POST http://dev.local/rest/user/login -d '{ "username":"zz","password":"zz"}'
+```
+
+After which point you need only include “-b cookies.txt” for all subsequent requests for them to be authenticated as the zz user.
+
+Like so:
+
+```
+curl -b cookies.txt -X GET http://dev.local/islandora/rest/v1/object/islandora:root
+```
+
+Assessing via jquery JavaScript:
+
+```
+Services -> Edit Resources -> select tab "Server" -> enable "application/x-www-form-urlencoded" to prevent " Unsupported request content type application/x-www-form-urlencoded"
+http://stackoverflow.com/questions/8535820/drupal-login-via-rest-server
+https://www.drupal.org/node/2279819
+https://www.drupal.org/node/1334758
+```
+
+```
+Javascript login - based on 2015-08-18 e-mail troubleshooting with Ed Armstrong
+http://stackoverflow.com/questions/8863571/cors-request-why-are-the-cookies-not-sent
+need to add xhrFields so cookies sent
+may need but unsure as of 2015-08-18:
+Header add Access-Control-Allow-Credentials "true"
+Header add Access-Control-Allow-Methods: "GET, POST, PUT, DELETE"
+Header add Access-Control-Allow-Headers: "Authorization"
+```
+
+```
+    $.ajax({
+        url: cwrcurl,
+        type: 'GET',
+        callback: '?',
+        datatype: 'application/json',
+        success: function() { alert("Success"); },
+        error: function() { alert('Failed!'); },
+        xhrFields: {
+            withCredentials: true
+        }
+```
