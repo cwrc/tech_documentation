@@ -3,14 +3,19 @@ Centralized storage for cwrc technical documentation.
 
 ### CWRC-Writer
 
+There are two main parts to a full CWRC-Writer installation, and each part runs more or less independently: 
+
+CWRC-Writer - The editor itself that runs as javascript in the web browser.
+
+CWRC-Server - the complementary backend services that run on a server and provide document storage, XML validation, and entity lookup.  These can be implemented however one would like - in any language or on any platform.
+
+You might then ask:  ‘If the server can be implemented willy-nilly, how does the CWRC-Writer know how to make calls to the server to get documents, etc?”  Good question - the answer is that a bit more javascript code has to be written that knows how to interact with the given server.  The CWRC-Writer expects that this javascript will be written as node.js modules (CommonJS) and that each module will export a specific API to which the CWRC-Writer knows how to make calls (e.g., loadDocument()).  The server-specific modules take care of the plumbing: making calls to the server and setting returned data in the CWRC-Writer.  The modules also provide their own dialogs since any interaction with a given server is likely different.  We bundle these supporting modules together with the CWRC-Writer (which is itself setup as node.js module) using browserify, which creates a single javascript file that is then included in the index.html file.
+
+Two CWRC-Writer installations that can be used as examples of how to put together a full CWRC-Writer installation are the [Islandora-CWRC-Writer](https://github.com/cwrc/Islandora-CWRC-Writer) and the [CWRC-GitWriter](https://github.com/cwrc/CWRC-GitWriter).
+
 An overview of development practices for CWRC-Writer packages:
 
 [CWRC-Writer-Dev-Docs](CWRC-Writer-Dev-Docs)
-
-The best starting point for understanding how to put together a new CWRC-Writer is the code for the sandbox instance of the CWRC-Writer:
-
-[CWRC-GitWriter](https://github.com/cwrc/CWRC-GitWriter)
-
 
 ------------------
 
