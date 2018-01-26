@@ -214,12 +214,44 @@ An overview of development practices for CWRC-Writer packages:
 * [spanishcivilwar.ca/themes/mounta-civil-theme](https://github.com/echidnacorp/mounta-civil-theme)
 
 ## Misc
-### Handy commands
 
-find . -name README.md  > /tmp/z
-sed 's%/[^/]*$%%' /tmp/z
-sed 's%/\([^/]*\)$%/\1](\1)%' /tmp/z > /tmp/zzzzz
-grep -R 'url = ' */.git/config
+### REST APIs
+
+How to access via the Islandora Rest API - https://github.com/discoverygarden/islandora_rest/blob/7.x/README.md
+
+Definitions:
+* PID: persistent identifier - FedoraCommons identifier for an object and part of the URI (commons.cwrc.ca/{PID} where {PID} is replaced with the object's PID
+
+* DSID: datastream ID - FedoraCommons datastream identifier 
+
+
+#### Pseudocode
+
+* setup authentication to a CWRC server
+  * The following describes the basics to setup a session via cookies (only required if extractor is running outside of Drupal (e.g., microservice or batch job) and items are not publicly visable - in the following section of this [GitHub Documentation](https://github.com/cwrc/tech_documentation#authentication-against-apis) 
+  * An internal Google Doc including the above details and some repository side setup is included at the following link (but shouldn't be needed in this context) -
+ [link](https://docs.google.com/document/d/1NBvM91g7XhUpens7e6UocaasZcaMhyt9ksYxRlb6ZWI/edit#heading=h.cixsnft4pbfa)
+
+```
+given a {PID}
+
+// lookup properties of the object via the REST endpoint
+https://{SERVER_NAME}/islandora/rest/v1/object/{PID}
+
+parse JSON response and save the "models" property
+
+// lookup content of a specified datastream via the REST endpoint
+`https://{SERVER_NAME}/islandora/rest/v1/object/{PID}/datastream/{DSID}/?content=true`
+
+Example REST calls:
+
+// lookup properties of the object via the REST endpoint
+`https://{SERVER_NAME}/islandora/rest/v1/object/orlando%3Ab4859cdd-8c58-46e9-bf2a-28bf8090fcbc`
+
+// lookup content of a specified datastream via the REST endpoint
+`https://{SERVER_NAME}/islandora/rest/v1/object/orlando%3Ab4859cdd-8c58-46e9-bf2a-28bf8090fcbc/datastream/CWRC/?content=true`
+
+```
 
 
 ### Authentication against APIs
@@ -269,3 +301,13 @@ Header add Access-Control-Allow-Headers: "Authorization"
             withCredentials: true
         }
 ```
+
+## Odds and ends
+### Handy commands
+
+To find readme files
+find . -name README.md  > /tmp/z
+sed 's%/[^/]*$%%' /tmp/z
+sed 's%/\([^/]*\)$%/\1](\1)%' /tmp/z > /tmp/zzzzz
+grep -R 'url = ' */.git/config
+
