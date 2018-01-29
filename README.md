@@ -215,6 +215,13 @@ An overview of development practices for CWRC-Writer packages:
 
 ## Misc
 
+
+### Preservation
+
+To allow a preservation system to pull content from the CWRC repository, the following extenstion provides the required REST API's: [BagIt Extension](https://github.com/cwrc/islandora_bagit_extension).
+
+The user needs to have view access to all Fedora objects. If the anonymous uses does not have access, then the REST Login API is required by the preservation client. 
+
 ### REST APIs
 
 How to access via the Islandora Rest API - https://github.com/discoverygarden/islandora_rest/blob/7.x/README.md
