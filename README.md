@@ -151,11 +151,11 @@ An overview of development practices for CWRC-Writer packages:
 * [default/modules/islandora_collection_search](https://github.com/discoverygarden/islandora_collection_search)
 * [default/modules/islandora_cwrc_basexdb](https://github.com/cwrc/islandora_cwrc_basexdb)
 * [default/modules/islandora_cwrc_credit_visualization](https://github.com/cwrc/islandora_cwrc_credit_visualization)
-* [default/modules/islandora_cwrc_document ???](https://github.com/jefferya/islandora_cwrc_document/islandora_cwrc_document)
-* [default/modules/islandora_cwrc_writer ???](https://github.com/jefferya/islandora_cwrc_documentislandora_cwrc_writer)
+* [default/modules/islandora_cwrc_document ???](https://github.com/cwrc/islandora_cwrc_document/islandora_cwrc_document)
+* [default/modules/islandora_cwrc_writer ???](https://github.com/cwrc/islandora_cwrc_documentislandora_cwrc_writer)
 * [default/modules/islandora_datastream_crud - is needed? If yes add git repo. Can it be replaced by islandora_xslt_paths?](https://github.com/Islandora/islandora_datastream_crud)
 * [default/modules/islandora_plotit](https://github.com/cwrc/islandora_plotit)
-* [default/modules/islandora_xslt_paths ???](https://github.com/jefferya/islandora_xslt_paths)
+* [default/modules/islandora_xslt_paths ???](https://github.com/cwrc/islandora_xslt_paths)
 
 #### digitalpage.ca
 
@@ -224,15 +224,15 @@ The user needs to have view access to all Fedora objects. If the anonymous uses 
 
 ### REST APIs
 
-How to access via the Islandora Rest API - https://github.com/discoverygarden/islandora_rest/blob/7.x/README.md
+#### General
+How to access Fedora objects via the Islandora Rest API - https://github.com/discoverygarden/islandora_rest/blob/7.x/README.md
 
 Definitions:
 * PID: persistent identifier - FedoraCommons identifier for an object and part of the URI (commons.cwrc.ca/{PID} where {PID} is replaced with the object's PID
 
 * DSID: datastream ID - FedoraCommons datastream identifier 
 
-
-#### Pseudocode
+##### Pseudocode - general usage of the REST API
 
 * setup authentication to a CWRC server
   * The following describes the basics to setup a session via cookies (only required if extractor is running outside of Drupal (e.g., microservice or batch job) and items are not publicly visable - in the following section of this [GitHub Documentation](https://github.com/cwrc/tech_documentation#authentication-against-apis) 
@@ -259,6 +259,15 @@ Example REST calls:
 `https://{SERVER_NAME}/islandora/rest/v1/object/orlando%3Ab4859cdd-8c58-46e9-bf2a-28bf8090fcbc/datastream/CWRC/?content=true`
 
 ```
+
+
+
+#### Specific REST APIs: CWRC Workflow
+How to access CWRC workflow informationa - https://github.com/cwrc/cwrc_workflow
+
+#### #### Specific REST APIs: CWRC Entities
+How to access CWRC entities - https://github.com/cwrc/cwrc_entities
+
 
 
 ### Authentication against APIs
