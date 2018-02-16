@@ -19,6 +19,112 @@ An overview of development practices for CWRC-Writer packages:
 
 ------------------
 
+## Misc
+
+
+### REST APIs
+
+#### General
+How to access Fedora objects via the Islandora Rest API - https://github.com/discoverygarden/islandora_rest/blob/7.x/README.md
+
+Definitions:
+* PID: persistent identifier - FedoraCommons identifier for an object and part of the URI (commons.cwrc.ca/{PID} where {PID} is replaced with the object's PID
+
+* DSID: datastream ID - FedoraCommons datastream identifier 
+
+##### Pseudocode - general usage of the REST API
+
+* setup authentication to a CWRC server
+  * The following describes the basics to setup a session via cookies (only required if extractor is running outside of Drupal (e.g., microservice or batch job) and items are not publicly visable - in the following section of this [GitHub Documentation](https://github.com/cwrc/tech_documentation#authentication-against-apis) 
+  * An internal Google Doc including the above details and some repository side setup is included at the following link (but shouldn't be needed in this context) -
+ [link](https://docs.google.com/document/d/1NBvM91g7XhUpens7e6UocaasZcaMhyt9ksYxRlb6ZWI/edit#heading=h.cixsnft4pbfa)
+
+```
+given a {PID}
+
+// lookup properties of the object via the REST endpoint
+https://{SERVER_NAME}/islandora/rest/v1/object/{PID}
+
+parse JSON response and save the "models" property
+
+// lookup content of a specified datastream via the REST endpoint
+`https://{SERVER_NAME}/islandora/rest/v1/object/{PID}/datastream/{DSID}/?content=true`
+
+Example REST calls:
+
+// lookup properties of the object via the REST endpoint
+`https://{SERVER_NAME}/islandora/rest/v1/object/orlando%3Ab4859cdd-8c58-46e9-bf2a-28bf8090fcbc`
+
+// lookup content of a specified datastream via the REST endpoint
+`https://{SERVER_NAME}/islandora/rest/v1/object/orlando%3Ab4859cdd-8c58-46e9-bf2a-28bf8090fcbc/datastream/CWRC/?content=true`
+
+```
+
+
+
+#### Specific REST APIs: CWRC Workflow
+How to access CWRC workflow informationa - https://github.com/cwrc/cwrc_workflow
+
+#### Specific REST APIs: CWRC Entities
+How to access CWRC entities - https://github.com/cwrc/cwrc_entities
+
+#### Preservation
+
+To allow a preservation system to pull content from the CWRC repository, the following extenstion provides the required REST API's: [BagIt Extension](https://github.com/cwrc/islandora_bagit_extension).
+
+The user needs to have view access to all Fedora objects. If the anonymous uses does not have access, then the REST Login API is required by the preservation client. 
+
+
+
+### Authentication against APIs
+
+CWRC uses the Drupal "Services" and "Rest Server"
+ 
+```
+curl -X POST -i -H "Content-type: application/json" -c cookies.txt -b cookies.txt -X POST http://dev.local/rest/user/login -d '{ "username":"zz","password":"zz"}'
+```
+
+After which point you need only include “-b cookies.txt” for all subsequent requests for them to be authenticated as the zz user.
+
+Like so:
+
+```
+curl -b cookies.txt -X GET http://dev.local/islandora/rest/v1/object/islandora:root
+```
+
+Assessing via jquery JavaScript:
+
+```
+Services -> Edit Resources -> select tab "Server" -> enable "application/x-www-form-urlencoded" to prevent " Unsupported request content type application/x-www-form-urlencoded"
+http://stackoverflow.com/questions/8535820/drupal-login-via-rest-server
+https://www.drupal.org/node/2279819
+https://www.drupal.org/node/1334758
+```
+
+```
+Javascript login - based on 2015-08-18 e-mail troubleshooting with Ed Armstrong
+http://stackoverflow.com/questions/8863571/cors-request-why-are-the-cookies-not-sent
+need to add xhrFields so cookies sent
+may need but unsure as of 2015-08-18:
+Header add Access-Control-Allow-Credentials "true"
+Header add Access-Control-Allow-Methods: "GET, POST, PUT, DELETE"
+Header add Access-Control-Allow-Headers: "Authorization"
+```
+
+```
+    $.ajax({
+        url: cwrcurl,
+        type: 'GET',
+        callback: '?',
+        datatype: 'application/json',
+        success: function() { alert("Success"); },
+        error: function() { alert('Failed!'); },
+        xhrFields: {
+            withCredentials: true
+        }
+```
+
+
 ## CWRC Repository Drupal modules (all in Git format) as of 2017-07-18
 
 
@@ -213,110 +319,7 @@ An overview of development practices for CWRC-Writer packages:
 
 * [spanishcivilwar.ca/themes/mounta-civil-theme](https://github.com/echidnacorp/mounta-civil-theme)
 
-## Misc
 
-
-### Preservation
-
-To allow a preservation system to pull content from the CWRC repository, the following extenstion provides the required REST API's: [BagIt Extension](https://github.com/cwrc/islandora_bagit_extension).
-
-The user needs to have view access to all Fedora objects. If the anonymous uses does not have access, then the REST Login API is required by the preservation client. 
-
-### REST APIs
-
-#### General
-How to access Fedora objects via the Islandora Rest API - https://github.com/discoverygarden/islandora_rest/blob/7.x/README.md
-
-Definitions:
-* PID: persistent identifier - FedoraCommons identifier for an object and part of the URI (commons.cwrc.ca/{PID} where {PID} is replaced with the object's PID
-
-* DSID: datastream ID - FedoraCommons datastream identifier 
-
-##### Pseudocode - general usage of the REST API
-
-* setup authentication to a CWRC server
-  * The following describes the basics to setup a session via cookies (only required if extractor is running outside of Drupal (e.g., microservice or batch job) and items are not publicly visable - in the following section of this [GitHub Documentation](https://github.com/cwrc/tech_documentation#authentication-against-apis) 
-  * An internal Google Doc including the above details and some repository side setup is included at the following link (but shouldn't be needed in this context) -
- [link](https://docs.google.com/document/d/1NBvM91g7XhUpens7e6UocaasZcaMhyt9ksYxRlb6ZWI/edit#heading=h.cixsnft4pbfa)
-
-```
-given a {PID}
-
-// lookup properties of the object via the REST endpoint
-https://{SERVER_NAME}/islandora/rest/v1/object/{PID}
-
-parse JSON response and save the "models" property
-
-// lookup content of a specified datastream via the REST endpoint
-`https://{SERVER_NAME}/islandora/rest/v1/object/{PID}/datastream/{DSID}/?content=true`
-
-Example REST calls:
-
-// lookup properties of the object via the REST endpoint
-`https://{SERVER_NAME}/islandora/rest/v1/object/orlando%3Ab4859cdd-8c58-46e9-bf2a-28bf8090fcbc`
-
-// lookup content of a specified datastream via the REST endpoint
-`https://{SERVER_NAME}/islandora/rest/v1/object/orlando%3Ab4859cdd-8c58-46e9-bf2a-28bf8090fcbc/datastream/CWRC/?content=true`
-
-```
-
-
-
-#### Specific REST APIs: CWRC Workflow
-How to access CWRC workflow informationa - https://github.com/cwrc/cwrc_workflow
-
-#### #### Specific REST APIs: CWRC Entities
-How to access CWRC entities - https://github.com/cwrc/cwrc_entities
-
-
-
-### Authentication against APIs
-
-CWRC uses the Drupal "Services" and "Rest Server"
- 
-```
-curl -X POST -i -H "Content-type: application/json" -c cookies.txt -b cookies.txt -X POST http://dev.local/rest/user/login -d '{ "username":"zz","password":"zz"}'
-```
-
-After which point you need only include “-b cookies.txt” for all subsequent requests for them to be authenticated as the zz user.
-
-Like so:
-
-```
-curl -b cookies.txt -X GET http://dev.local/islandora/rest/v1/object/islandora:root
-```
-
-Assessing via jquery JavaScript:
-
-```
-Services -> Edit Resources -> select tab "Server" -> enable "application/x-www-form-urlencoded" to prevent " Unsupported request content type application/x-www-form-urlencoded"
-http://stackoverflow.com/questions/8535820/drupal-login-via-rest-server
-https://www.drupal.org/node/2279819
-https://www.drupal.org/node/1334758
-```
-
-```
-Javascript login - based on 2015-08-18 e-mail troubleshooting with Ed Armstrong
-http://stackoverflow.com/questions/8863571/cors-request-why-are-the-cookies-not-sent
-need to add xhrFields so cookies sent
-may need but unsure as of 2015-08-18:
-Header add Access-Control-Allow-Credentials "true"
-Header add Access-Control-Allow-Methods: "GET, POST, PUT, DELETE"
-Header add Access-Control-Allow-Headers: "Authorization"
-```
-
-```
-    $.ajax({
-        url: cwrcurl,
-        type: 'GET',
-        callback: '?',
-        datatype: 'application/json',
-        success: function() { alert("Success"); },
-        error: function() { alert('Failed!'); },
-        xhrFields: {
-            withCredentials: true
-        }
-```
 
 ## Odds and ends
 ### Handy commands
