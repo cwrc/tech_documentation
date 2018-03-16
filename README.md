@@ -74,7 +74,9 @@ To allow a preservation system to pull content from the CWRC repository, the fol
 
 The user needs to have view access to all Fedora objects. If the anonymous uses does not have access, then the REST Login API is required by the preservation client. 
 
+#### Schema Validation
 
+To allow the CWRC-Writer to validate a document against a schema via a web API (https://github.com/cwrc/cwrc-validator).
 
 ### Authentication against APIs
 
