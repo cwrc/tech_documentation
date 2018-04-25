@@ -11,6 +11,47 @@ Credit Visualization tool for visualizing the workflow stamps and doc dif. For p
 
 XML & RDF browser-based editor
 
+### Documentation
+* [User Documentation](https://cwrc.ca/CWRC-Writer_Documentation/)
+* Tech documentation:
+    * [CWRC-Writer developer documentation (general)](https://github.com/cwrc/CWRC-Writer-Dev-Docs/blob/master/README.md)
+    * [CWRC-WriterBase](https://github.com/cwrc/CWRC-WriterBase/blob/master/README.md)
+    * [CWRC-GitWriter](https://github.com/cwrc/CWRC-GitWriter/blob/master/README.md)
+        * [CWRC-GitDialogs](https://github.com/cwrc/cwrc-git-dialogs/blob/master/README.md)
+    * [CWRC-PublicEntityDialogs](https://github.com/cwrc/CWRC-PublicEntityDialogs/blob/master/README.md)
+        * [VIAF](https://github.com/cwrc/viaf-entity-lookup/blob/master/README.md)
+	* [Wikidata](https://github.com/cwrc/wikidata-entity-lookup/blob/master/README.md)
+	* [Getty](https://github.com/cwrc/getty-entity-lookup/blob/master/README.md)
+	* [DBpedia](https://github.com/cwrc/dbpedia-entity-lookup/blob/master/README.md)
+	* [GeoNames](https://github.com/cwrc/geonames-entity-lookup/blob/master/README.md)
+    
+
+### Download
+
+
+### Factsheet
+
+
+### License
+
+
+### Provenance
+
+
+### Release Notes
+
+
+### Source
+
+
+
+### Support
+
+
+
+
+
+
 **Implementations:**
 
 Git-Writer:
