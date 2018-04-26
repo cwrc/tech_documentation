@@ -12,41 +12,91 @@ Credit Visualization tool for visualizing the workflow stamps and doc dif. For p
 XML & RDF browser-based editor
 
 ### Documentation
-* [User Documentation](https://cwrc.ca/CWRC-Writer_Documentation/)
-* Tech documentation:
-    * [CWRC-Writer developer documentation (general)](https://github.com/cwrc/CWRC-Writer-Dev-Docs/blob/master/README.md)
-    * [CWRC-WriterBase](https://github.com/cwrc/CWRC-WriterBase/blob/master/README.md)
-    * [CWRC-GitWriter](https://github.com/cwrc/CWRC-GitWriter/blob/master/README.md)
-        * [CWRC-GitDialogs](https://github.com/cwrc/cwrc-git-dialogs/blob/master/README.md)
-    * [CWRC-PublicEntityDialogs](https://github.com/cwrc/CWRC-PublicEntityDialogs/blob/master/README.md)
-        * [VIAF](https://github.com/cwrc/viaf-entity-lookup/blob/master/README.md)
-	* [Wikidata](https://github.com/cwrc/wikidata-entity-lookup/blob/master/README.md)
-	* [Getty](https://github.com/cwrc/getty-entity-lookup/blob/master/README.md)
-	* [DBpedia](https://github.com/cwrc/dbpedia-entity-lookup/blob/master/README.md)
-	* [GeoNames](https://github.com/cwrc/geonames-entity-lookup/blob/master/README.md)
+
+[User Documentation](https://cwrc.ca/CWRC-Writer_Documentation/)
+
+Tech documentation:
+
+* [CWRC-Writer developer documentation (general)](https://github.com/cwrc/CWRC-Writer-Dev-Docs/blob/master/README.md)
+* [CWRC-WriterBase](https://github.com/cwrc/CWRC-WriterBase/blob/master/README.md)
+* [CWRC-GitWriter](https://github.com/cwrc/CWRC-GitWriter/blob/master/README.md)
+    * [CWRC-GitDialogs](https://github.com/cwrc/cwrc-git-dialogs/blob/master/README.md)
+* [CWRC-PublicEntityDialogs](https://github.com/cwrc/CWRC-PublicEntityDialogs/blob/master/README.md)
+    * [VIAF](https://github.com/cwrc/viaf-entity-lookup/blob/master/README.md)
+    * [Wikidata](https://github.com/cwrc/wikidata-entity-lookup/blob/master/README.md)
+    * [Getty](https://github.com/cwrc/getty-entity-lookup/blob/master/README.md)
+    * [DBpedia](https://github.com/cwrc/dbpedia-entity-lookup/blob/master/README.md)
+    * [GeoNames](https://github.com/cwrc/geonames-entity-lookup/blob/master/README.md)
     
 
 ### Download
 
+GitHub:
+* [CWRC-WriterBase](https://github.com/cwrc/CWRC-WriterBase/archive/master.zip)
+* [CWRC-GitWriter](https://github.com/cwrc/CWRC-GitWriter/archive/master.zip)
+    * [CWRC-GitDialogs](https://github.com/cwrc/cwrc-git-dialogs/archive/master.zip)
+* [CWRC-PublicEntityDialogs](https://github.com/cwrc/CWRC-PublicEntityDialogs/archive/master.zip)
+    * [VIAF](https://github.com/cwrc/viaf-entity-lookup/archive/master.zip)
+    * [Wikidata](https://github.com/cwrc/wikidata-entity-lookup/archive/master.zip)
+    * [Getty](https://github.com/cwrc/getty-entity-lookup/archive/master.zip)
+    * [DBpedia](https://github.com/cwrc/dbpedia-entity-lookup/archive/master.zip)
+    * [GeoNames](https://github.com/cwrc/geonames-entity-lookup/archive/master.zip)
+    
+NPM:
+* [CWRC-Writer Base](https://www.npmjs.com/package/cwrc-writer-base)
+    * [CWRC-Writer layout](https://www.npmjs.com/package/cwrc-writer-layout)
+* GitHub implementation:
+    * [CWRC Git](https://www.npmjs.com/package/cwrcgit)
+    * [CWRC Git Dialogs](https://www.npmjs.com/package/cwrc-git-dialogs)
+    * [CWRC Git Delegator](https://www.npmjs.com/package/cwrc-git-delegator)
+    * [CWRC Git Server Client](https://www.npmjs.com/package/cwrc-git-server-client)
+* [CWRC Public Entity Dialogs](https://www.npmjs.com/package/cwrc-public-entity-dialogs)
+    * [VIAF](https://www.npmjs.com/package/viaf-entity-lookup)
+    * [Wikidata](https://www.npmjs.com/package/wikidata-entity-lookup)
+    * [Getty](https://www.npmjs.com/package/getty-entity-lookup)
+    * [DBpedia](https://www.npmjs.com/package/dbpedia-entity-lookup)
+    * [GeoNames](https://www.npmjs.com/package/geonames-entity-lookup)
 
+Docker:
+* [CWRC-GitDocker](https://gitlab.dh.tamu.edu/bptarpley/CWRC-GitDocker)
+    
 ### Factsheet
 
 
 ### License
 
+* https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
 
 ### Provenance
-
+* [Development Workflow](https://github.com/cwrc/Administrative-documentation/wiki/CWRC-Writer-development-workflow)
 
 ### Release Notes
 
+* [CWRC-WriterBase](https://github.com/cwrc/CWRC-WriterBase/releases)
+* [CWRC-GitWriter](https://github.com/cwrc/CWRC-GitWriter/releases)
+    * [CWRC-GitDialogs](https://github.com/cwrc/cwrc-git-dialogs/releases)
+* [CWRC-PublicEntityDialogs](https://github.com/cwrc/CWRC-PublicEntityDialogs/releases)
+    * [VIAF](https://github.com/cwrc/viaf-entity-lookup/releases)
+    * [Wikidata](https://github.com/cwrc/wikidata-entity-lookup/releases)
+    * [Getty](https://github.com/cwrc/getty-entity-lookup/releases)
+    * [DBpedia](https://github.com/cwrc/dbpedia-entity-lookup/releases)
+    * [GeoNames](https://github.com/cwrc/geonames-entity-lookup/releases)
 
 ### Source
 
-
+* [CWRC-WriterBase](https://github.com/cwrc/CWRC-WriterBase)
+* [CWRC-GitWriter](https://github.com/cwrc/CWRC-GitWriter)
+    * [CWRC-GitDialogs](https://github.com/cwrc/cwrc-git-dialogs)
+* [CWRC-PublicEntityDialogs](https://github.com/cwrc/CWRC-PublicEntityDialogs)
+    * [VIAF](https://github.com/cwrc/viaf-entity-lookup)
+    * [Wikidata](https://github.com/cwrc/wikidata-entity-lookup)
+    * [Getty](https://github.com/cwrc/getty-entity-lookup)
+    * [DBpedia](https://github.com/cwrc/dbpedia-entity-lookup)
+    * [GeoNames](https://github.com/cwrc/geonames-entity-lookup)
 
 ### Support
-
+* [How to submit issues](https://github.com/cwrc/Administrative-documentation/wiki/How-to-submit-issues-within-CWRC)
+* [Where to submit CWRC-Writer issues](https://github.com/cwrc/Administrative-documentation/wiki/Where-to-submit-CWRC-Writer-related-issues#general)
 
 
 
