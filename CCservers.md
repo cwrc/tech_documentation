@@ -15,7 +15,7 @@ Test / Staging VM - Compute Canada VM - snapshot of production content (shared F
 
 * test-01.cwrc.ca (GitHub webhook automatically updates Drupal code with 'develop' branch)
 
-* staging.cwrc.ca (GitHub webhook automatically updates Drupal code with 'master' branch)
+* staging-01.cwrc.ca (GitHub webhook automatically updates Drupal code with 'master' branch)
 
 Notes re test/staging: 
 * 100% of production Fedora content as of June 5th, 2018. 
