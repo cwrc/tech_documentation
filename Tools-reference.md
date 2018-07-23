@@ -160,8 +160,8 @@ Named Entity Recognition and Vetting Environment
 
 **Implementations:**
 
-- http://dh.sharcnet.ca/nerve/nerve.html with redirect from  http://beta.cwrc.ca/tools/nerve/nerve.html
-- soon  - a dev and prod version at dev-nerve.cwrc.ca and nerve.cwrc.ca respectively
+- dh.sharcnet.ca/dev - dev version
+- dh.sharcnet.ca/nerve - prod version
 
 **[Sample documents for testing](https://www.dropbox.com/sh/y5mnmqpux7fp50l/AAAaJA-0VPvoxtBxc31LinMja?dl=0)**
 
