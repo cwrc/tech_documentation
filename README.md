@@ -15,7 +15,7 @@ Two CWRC-Writer installations that can be used as examples of how to put togethe
 
 An overview of development practices for CWRC-Writer packages:
 
-[CWRC-Writer-Dev-Docs](CWRC-Writer-Dev-Docs)
+[CWRC-Writer-Dev-Docs](https://github.com/cwrc/CWRC-Writer-Dev-Docs/blob/master/README.md)
 
 ------------------
 
