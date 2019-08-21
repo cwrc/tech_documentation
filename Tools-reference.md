@@ -147,7 +147,7 @@ Humanities Vizualization (?)
 **Implementations:**
 - [HuViz Alpha](http://alpha.huviz.dev.nooron.com/) - latest changes 
 - [HuViz Beta](http://beta.huviz.dev.nooron.com/) - stable version, use for demos
-- [HuViz Production](http://huviz.dev.nooron.com/)
+- [HuViz Production](http://huviz.cwrc.ca/)
 
 **[GitHub repository](https://github.com/cwrc/HuViz)**
 
