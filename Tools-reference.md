@@ -170,6 +170,16 @@ Named Entity Recognition and Vetting Environment
 
 **[Google folder](https://drive.google.com/drive/folders/0B6QNAc65ZX4PYUozSWxFTk9UV00)**
 
+Details of nerve.services.cwrc.ca
+* Build instructions updated in the NERVE README.md [3] and also included in the Dockerfile [2] and Dockerfile.standalone-build file.
+* Automatic deployment of Nerve setup; pulls from the master branch
+* DockerHub setup to be the image registry: <https://hub.docker.com/repository/docker/cwrc/nerve> and will rebuild the image each time the master branch is updated.
+* nerve.services.cwrc.ca setup to automatically poll DockerHub for image changes every 5mins, pull down the update, and recreate the nerve container.* Traefik configured to manage the secure http certificate and route requests to nerve.services.cwrc.ca
+
+> [1] https://github.com/cwrc/tech_documentation/blob/master/Tools-reference.md#nerve \
+> [2] https://github.com/cwrc/NERVE/blob/master/Dockerfile \
+> [3] https://github.com/cwrc/NERVE 
+
 ## Plot-It 
 
 Timeline and Mapping Visualization Tool
