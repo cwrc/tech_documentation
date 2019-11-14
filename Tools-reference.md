@@ -160,6 +160,7 @@ Named Entity Recognition and Vetting Environment
 
 **Implementations:**
 
+- nerve.services.cwrc.ca - auto deployed from DockerHub cwrc/nerve:latest auto-built from the master branch of https://github.com/cwrc/NERVE 2019-11-14 (via Watchtower and Traefik)
 - dh.sharcnet.ca/dev - dev version
 - dh.sharcnet.ca/nerve - prod version
 
