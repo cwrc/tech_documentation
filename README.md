@@ -25,45 +25,94 @@ An overview of development practices for CWRC-Writer packages:
 ### REST APIs
 
 #### General
-How to access Fedora objects via the Islandora Rest API - https://github.com/discoverygarden/islandora_rest/blob/7.x/README.md
+CWRC offers a the Islandora REST as a means to interact programatically with repository. This section summerizes the more detailed documentation available here: https://github.com/discoverygarden/islandora_rest/blob/7.x/README.md
 
 Definitions:
 * PID: persistent identifier - FedoraCommons identifier for an object and part of the URI (commons.cwrc.ca/{PID} where {PID} is replaced with the object's PID
 
 * DSID: datastream ID - FedoraCommons datastream identifier 
 
-##### Pseudocode - general usage of the REST API
+##### General strategy (used outside of Drupal e.g., on another server)
 
-* setup authentication to a CWRC server
-  * The following describes the basics to setup a session via cookies (only required if extractor is running outside of Drupal (e.g., microservice or batch job) and items are not publicly visable - in the following section of this [GitHub Documentation](https://github.com/cwrc/tech_documentation#authentication-against-apis) 
-  * An internal Google Doc including the above details and some repository side setup is included at the following link (but shouldn't be needed in this context) -
- [link](https://docs.google.com/document/d/1NBvM91g7XhUpens7e6UocaasZcaMhyt9ksYxRlb6ZWI/edit#heading=h.cixsnft4pbfa)
+* Step 1. Authentication against cwrc.ca (Islandora REST  Drupal Module). A command-line curl example that can be translated into programming language of choice.
+
+```
+curl -X POST -i -H "Content-type: application/json" -c token.txt -b token.txt -X POST https://${SERVER_NAME}/rest/user/login -d '{ "username":"${USERNAME}","password":"${PASSWORD}"}'
+```
+
+* Step 2. Lookup an object by PID (Persistent IDentifier)
+
+```
+curl -b token.txt -X GET https://${SERVER_NAME}/islandora/rest/v1/object/${PID}`
+```
+
+Notes:
+
+* More details on the authentication and the basics to setup a session via cookies (only required if code is running outside of Drupal (e.g., microservice or batch job) and items are not publicly visable) are located in the following section of [Auth](https://github.com/cwrc/tech_documentation#authentication-against-apis)
+* Server-side setup (not applicable for client access): an internal Google Doc including the above details and some repository side setup is included at the following link (but shouldn't be needed in this context)  [link](https://docs.google.com/document/d/1NBvM91g7XhUpens7e6UocaasZcaMhyt9ksYxRlb6ZWI/edit#heading=h.cixsnft4pbfa)
+
+##### general usage of the REST API - common calls
 
 ```
 given a {PID}
 
 // lookup properties of the object via the REST endpoint
-https://{SERVER_NAME}/islandora/rest/v1/object/{PID}
+https://${SERVER_NAME}/islandora/rest/v1/object/{PID}
 
-parse JSON response and save the "models" property
+the JSON response contains properties 
 
 // lookup content of a specified datastream via the REST endpoint
-`https://{SERVER_NAME}/islandora/rest/v1/object/{PID}/datastream/{DSID}/?content=true`
+`https://${SERVER_NAME}/islandora/rest/v1/object/${PID}/datastream/${DSID}/?content=true`
+
 
 Example REST calls:
 
 // lookup properties of the object via the REST endpoint
-`https://{SERVER_NAME}/islandora/rest/v1/object/orlando%3Ab4859cdd-8c58-46e9-bf2a-28bf8090fcbc`
+`https://${SERVER_NAME}/islandora/rest/v1/object/orlando%3Ab4859cdd-8c58-46e9-bf2a-28bf8090fcbc`
 
 // lookup content of a specified datastream via the REST endpoint
-`https://{SERVER_NAME}/islandora/rest/v1/object/orlando%3Ab4859cdd-8c58-46e9-bf2a-28bf8090fcbc/datastream/CWRC/?content=true`
+`https://${SERVER_NAME}/islandora/rest/v1/object/orlando%3Ab4859cdd-8c58-46e9-bf2a-28bf8090fcbc/datastream/CWRC/?content=true`
 
 ```
 
+##### Psuedocode: given a collection PID, authenticate and download a specified datastream from all items in the collection
+
+1. Authenticate: creates a token that is passed in as part of subsequent API requests
+
+```
+curl -X POST -i -H "Content-type: application/json" -c token.txt -b token.txt -X POST https://${SERVER_NAME}/rest/user/login -d '{ "username":"${USERNAME}","password":"${PASSWORD}"}'
+```
+
+2. define a set of objects (i.e., list of PIDs) to process, for example, lookup objects by ${COLLECTION_PID}. Note: a Solr query is an option to define the set objects; `rows` & `start` can be used for pagination of results plus the JSON response contains `numFound` .
+
+```
+curl -b token.txt -X GET "https://${SERVER_NAME}/islandora/rest/v1/solr/RELS_EXT_isMemberOfCollection_uri_mt:\"${COLLECTION_PID}\"?fl=PID&rows=999999&wt=json"
+```
+
+3. foreach object (i.e., PID) in step 2, retrieve the associated metadata
+
+```
+curl -b token.txt -X GET https://${SERVER_NAME}/islandora/rest/v1/object/${PID}
+```
+
+4. in the JSON metadata acquired during the previous step, use the `models` property to lookup the datastream ID (DSID) containing the XML -- below is the mapping
+
+* if `cwrc:documentCModel` then DSID = `CWRC` // event/entry
+* if `cwrc:citationCModel` then DSID = `MODS` // bibliography
+* if `cwrc:person-entityCModel` then DSID = `PERSON` // person entity
+* if `cwrc:organization-entityCModel` then DSID = `ORGANIZATION` // organization entity
+
+5. lookup the contents XML of specified datastream ${DSID} attached to the object ${PID}
+
+```
+curl -b token.txt -X GET https://${SERVER_NAME}/islandora/rest/v1/object/${PID}/datastream/${DSID}?content=true
+```
+
+More information on the REST API used above can be found here: https://github.com/discoverygarden/islandora_rest/blob/7.x/README.md
 
 
 #### Specific REST APIs: CWRC Workflow
-How to access CWRC workflow informationa - https://github.com/cwrc/cwrc_workflow
+How to access CWRC workflow information - https://github.com/cwrc/cwrc_workflow
 
 #### Specific REST APIs: CWRC Entities
 How to access CWRC entities - https://github.com/cwrc/cwrc_entities
