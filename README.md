@@ -86,7 +86,7 @@ curl -X POST -i -H "Content-type: application/json" -c token.txt -b token.txt -X
 2. define a set of objects (i.e., list of PIDs) to process, for example, lookup objects by ${COLLECTION_PID}. Note: a Solr query is an option to define the set objects; `rows` & `start` can be used for pagination of results plus the JSON response contains `numFound` .
 
 ```
-curl -b token.txt -X GET "https://${SERVER_NAME}/islandora/rest/v1/solr/RELS_EXT_isMemberOfCollection_uri_mt:\"${COLLECTION_PID}\"?fl=PID&rows=999999&wt=json"
+curl -b token.txt -X GET "https://${SERVER_NAME}/islandora/rest/v1/solr/RELS_EXT_isMemberOfCollection_uri_mt:\"${COLLECTION_PID}\"?fl=PID&rows=999999&start=0&wt=json"
 ```
 
 3. foreach object (i.e., PID) in step 2, retrieve the associated metadata
