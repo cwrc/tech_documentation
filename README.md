@@ -77,7 +77,7 @@ Example REST calls:
 
 ##### Psuedocode: given a collection PID, authenticate and download a specified datastream from all items in the collection
 
-1. Authenticate: creates a token that is passed in as part of subsequent API requests
+1. Authenticate: creates a token that is passed in as part of subsequent API requests. The user must have `view` access to the collection and all objects within the collection plus Drupal permissions to use the Islandora REST API (https://${SERVER_NAME}/admin/people/permissions): `View Objects` & `View Datastreams`
 
 ```
 curl -X POST -i -H "Content-type: application/json" -c token.txt -b token.txt -X POST https://${SERVER_NAME}/rest/user/login -d '{ "username":"${USERNAME}","password":"${PASSWORD}"}'
