@@ -102,7 +102,7 @@ curl -b token.txt -X GET https://${SERVER_NAME}/islandora/rest/v1/object/${PID}
 * if `cwrc:person-entityCModel` then DSID = `PERSON` // person entity
 * if `cwrc:organization-entityCModel` then DSID = `ORGANIZATION` // organization entity
 
-5. lookup the contents XML of specified datastream ${DSID} attached to the object ${PID}
+5. request the contents (XML) within the specified datastream ${DSID} attached to the object ${PID}
 
 ```
 curl -b token.txt -X GET https://${SERVER_NAME}/islandora/rest/v1/object/${PID}/datastream/${DSID}?content=true
