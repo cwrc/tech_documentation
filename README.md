@@ -180,7 +180,7 @@ Header add Access-Control-Allow-Headers: "Authorization"
 
 ToDo: elaborate
 
-Circa 2018-2021, [CARARIE](https://science.canarie.ca/researchsoftware/researchresource/main.html?resourceID=146) checks the health of the cwrc.ca site along with gathering usage stats plus housing links to information about the platform in CANARIE platform registry. The information provided to the CANARIE registry is provided by endpoints defined in [cwrc_core_tweaks](https://github.com/cwrc/cwrc_core_tweaks). URL's provided to the CANARIE registry either point to Drupal pages or to redirects such as the [Fact Sheet redirect](https://cwrc.ca/admin/config/search/redirect/edit/57?destination=admin/config/search/redirect/list/fact)
+Circa 2018-2021, [CANARIE](https://science.canarie.ca/researchsoftware/researchresource/main.html?resourceID=146) checks the health of the cwrc.ca site along with gathering usage stats plus housing links to information about the platform in CANARIE platform registry. The information provided to the CANARIE registry is provided by endpoints defined in [cwrc_core_tweaks](https://github.com/cwrc/cwrc_core_tweaks). URL's provided to the CANARIE registry either point to Drupal pages or to redirects such as the [Fact Sheet redirect](https://cwrc.ca/admin/config/search/redirect/edit/57?destination=admin/config/search/redirect/list/fact)
 
 
 
