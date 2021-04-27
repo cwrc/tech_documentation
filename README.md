@@ -75,7 +75,7 @@ Example REST calls:
 
 ```
 
-##### Psuedocode: given a collection PID, authenticate and download a specified datastream from all items in the collection
+##### Downloading Psuedocode: given a collection PID, authenticate and download a specified datastream from all items in the collection
 
 1. Authenticate: creates a token that is passed in as part of subsequent API requests. The user must have `view` access to the collection and all objects within the collection plus Drupal permissions to use the Islandora REST API (https://${SERVER_NAME}/admin/people/permissions): `View Objects` & `View Datastreams`
 
@@ -111,11 +111,55 @@ curl -b token.txt -X GET https://${SERVER_NAME}/islandora/rest/v1/object/${PID}/
 More information on the REST API used above can be found here: https://github.com/discoverygarden/islandora_rest/blob/7.x/README.md
 
 
+##### Updating Psuedocode: given an object PID, authenticate then lock the object, download a specified datastream, and then update/upload the object
+
+1. Determine how long you will need to process the objects and ask to set the collection object locking time `/islandora/object/${COLLECTION_ID}/manage/collection ==> Manage lock objects`.
+
+2. Follow the steps in the `Downloading psuedocode example above to gather the object contents you wish to process
+
+3. Add to the above steps an API call to lock the object to prevent users from changing the item while you yourself are changing that item (overwriting others work since to original download) [details](https://github.com/echidnacorp/islandora_object_lock/blob/7.x/islandora_object_lock_rest/README.md)
+
+    * Check if lock exists
+        ```
+        curl -b token.txt -X GET https://${SERVER_NAME}/islandora/rest/v1/object/${PID}/lock
+        ```
+    * Aquire lock
+        ```
+        curl -b token.txt -X POST https://${SERVER_NAME}/islandora/rest/v1/object/${PID}/lock
+        ```
+
+4. Process downloaded items
+
+5. Once ready to place items back into the repository, update object datastream in repository (see notes below)
+
+```
+curl -b token.txt -X POST -F "method=PUT" -F "file=@${SOURCE_FILE}" https://${SERVER_NAME}/islandora/rest/v1/object/${PID}/datastream/${DSID}
+```
+
+6. Add workflow information describing the change [details](https://github.com/cwrc/cwrc_workflow/blob/7.x/README.md) : ask what the `activity` should look like
+
+```
+curl -b token.txt -G -X GET "https://${SERVER_NAME}/islandora_workflow_rest/v1/add_workflow" -d PID=${PID} -d activity='{"category":"metadata_contribution","stamp":"orlando:ENH","status":"c","note":"entity"}'
+```
+
+Note: documentation regarding the REST API update: "... provided the ability to mock PUT / DELETE requests as POST requests by adding an additional form-data field method to inform the server which method was actually intended.  At the moment multi-part PUT requests such as the one required to modify an existing datastream's content and properties are not implemented you can mock these PUT requests using aforementioned mechanism.POST and include an additional form-data field method with the value PUT...."
+
+Note: other approaches to prevent multiple users writing to the same content, the metadata for a datastream (HTTP GET on the object DSID) contains a checksum. Saving the checksum at download time and then comparing to the current checksum could act as a mechanism to verify the respository content has not been modified.
+
+More information on the REST API used above can be found here: https://github.com/discoverygarden/islandora_rest/blob/7.x/README.md
+
+
 #### Specific REST APIs: CWRC Workflow
-How to access CWRC workflow information - https://github.com/cwrc/cwrc_workflow
+
+How to access CWRC workflow information - <https://github.com/cwrc/cwrc_workflow>
 
 #### Specific REST APIs: CWRC Entities
-How to access CWRC entities - https://github.com/cwrc/cwrc_entities
+
+How to access CWRC entities - <https://github.com/cwrc/cwrc_entities>
+
+#### Sepcific REST APIs: Object locking
+
+How to lock and unlock and existing object - <https://github.com/echidnacorp/islandora_object_lock>, <https://github.com/echidnacorp/islandora_object_lock/blob/7.x/islandora_object_lock_rest/README.md>
 
 #### Preservation
 
