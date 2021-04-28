@@ -153,7 +153,14 @@ Note: documentation regarding the REST API update: "... mock PUT / DELETE reques
 
 Note: other approaches to prevent write collisions:
 
-* the metadata for a datastream (HTTP GET on the object DSID) contains a checksum. Saving the checksum at download time and then comparing to the checksum on the server at upload could act as a mechanism to verify the respository content has not been modified.
+* the metadata for a datastream (HTTP GET on the object DSID) contains a checksum. Saving the checksum at download time and then comparing to the checksum on the server at upload could act as a mechanism to verify the respository content has not been modified. Note all object have a checksum
+```
+curl -b token.txt -X GET https://${SERVER_NAME}/islandora/rest/v1/object/${PID}/datastream/${DSID}?content=false
+```
+* use the date on the created version
+```
+curl -b token.txt -X GET https://${SERVER_NAME}/islandora/rest/v1/object/${PID}/datastream/${DSID}?content=false
+```
 
 More information on the REST API used above can be found here: https://github.com/discoverygarden/islandora_rest/blob/7.x/README.md
 
