@@ -142,6 +142,13 @@ curl -b token.txt -X POST -F "method=PUT" -F "file=@${SOURCE_FILE}" https://${SE
 curl -b token.txt -G -X GET "https://${SERVER_NAME}/islandora_workflow_rest/v1/add_workflow" -d PID=${PID} -d activity='{"category":"metadata_contribution","stamp":"orlando:ENH","status":"c","note":"entity"}'
 ```
 
+7. Remove lock (if lock exists): `CWRC` datastream will not release the lock an update event like some other datastreams will (details: [exclusion list](https://github.com/cwrc/cwrc_islandora_tweaks/blob/develop/cwrc_islandora_tweaks.module#L190-L199), and CWRC-Writer `save` versus `save and exit` functionality.
+
+```
+curl -b token.txt -X DELETE https://${SERVER_NAME}/islandora/rest/v1/object/${PID}/lock
+```
+
+
 Note: documentation regarding the REST API update: "... mock PUT / DELETE requests as POST requests by adding an additional form-data field method to inform the server which method was actually intended.  At the moment multi-part PUT requests such as the one required to modify an existing datastream's content and properties are not implemented you can mock these PUT requests using aforementioned mechanism.POST and include an additional form-data field method with the value PUT...."
 
 Note: other approaches to prevent write collisions:
