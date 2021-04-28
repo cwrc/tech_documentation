@@ -30,7 +30,7 @@ CWRC offers a the Islandora REST as a means to interact programatically with rep
 Definitions:
 * PID: persistent identifier - FedoraCommons identifier for an object and part of the URI (commons.cwrc.ca/{PID} where {PID} is replaced with the object's PID
 
-* DSID: datastream ID - FedoraCommons datastream identifier 
+* DSID: DataStream ID or FedoraCommons datastream identifier - ID of the location where content is stored
 
 ##### General strategy (used outside of Drupal e.g., on another server)
 
@@ -75,7 +75,7 @@ Example REST calls:
 
 ```
 
-##### Downloading Psuedocode: given a collection PID, authenticate and download a specified datastream from all items in the collection
+##### Downloading Content Psuedocode: given a collection PID, authenticate and download a specified datastream from all items in the collection
 
 1. Authenticate: creates a token that is passed in as part of subsequent API requests. The user must have `view` access to the collection and all objects within the collection plus Drupal permissions to use the Islandora REST API (https://${SERVER_NAME}/admin/people/permissions): `View Objects` & `View Datastreams`
 
@@ -111,11 +111,11 @@ curl -b token.txt -X GET https://${SERVER_NAME}/islandora/rest/v1/object/${PID}/
 More information on the REST API used above can be found here: https://github.com/discoverygarden/islandora_rest/blob/7.x/README.md
 
 
-##### Updating Psuedocode: given an object PID, authenticate then lock the object, download a specified datastream, and then update/upload the object
+##### Updating Content Psuedocode: given an object PID, lock the object, download the specified datastream, process, and then upload the content back to CWRC
 
-1. Determine how long you will need to process the objects and ask to set the collection object locking time `/islandora/object/${COLLECTION_ID}/manage/collection ==> Manage lock objects`.
+1. Determine how long you will need to process the objects and ask a CWRC admin to set the collection object locking time `/islandora/object/${COLLECTION_ID}/manage/collection ==> Manage lock objects`.
 
-2. Follow the steps in the `Downloading psuedocode example above to gather the object contents you wish to process
+2. Follow the steps in the `Downloading content psuedocode` example above to gather the object contents you wish to process
 
 3. Add to the above steps an API call to lock the object to prevent users from changing the item while you yourself are changing that item (overwriting others work since to original download) [details](https://github.com/echidnacorp/islandora_object_lock/blob/7.x/islandora_object_lock_rest/README.md)
 
@@ -136,18 +136,19 @@ More information on the REST API used above can be found here: https://github.co
 curl -b token.txt -X POST -F "method=PUT" -F "file=@${SOURCE_FILE}" https://${SERVER_NAME}/islandora/rest/v1/object/${PID}/datastream/${DSID}
 ```
 
-6. Add workflow information describing the change [details](https://github.com/cwrc/cwrc_workflow/blob/7.x/README.md) : ask what the `activity` should look like
+6. Add workflow information describing the change [details here](https://github.com/cwrc/cwrc_workflow/blob/7.x/README.md) : ask a CWRC admin for the workflow parameters to add via the `activity` parameter
 
 ```
 curl -b token.txt -G -X GET "https://${SERVER_NAME}/islandora_workflow_rest/v1/add_workflow" -d PID=${PID} -d activity='{"category":"metadata_contribution","stamp":"orlando:ENH","status":"c","note":"entity"}'
 ```
 
-Note: documentation regarding the REST API update: "... provided the ability to mock PUT / DELETE requests as POST requests by adding an additional form-data field method to inform the server which method was actually intended.  At the moment multi-part PUT requests such as the one required to modify an existing datastream's content and properties are not implemented you can mock these PUT requests using aforementioned mechanism.POST and include an additional form-data field method with the value PUT...."
+Note: documentation regarding the REST API update: "... mock PUT / DELETE requests as POST requests by adding an additional form-data field method to inform the server which method was actually intended.  At the moment multi-part PUT requests such as the one required to modify an existing datastream's content and properties are not implemented you can mock these PUT requests using aforementioned mechanism.POST and include an additional form-data field method with the value PUT...."
 
-Note: other approaches to prevent multiple users writing to the same content, the metadata for a datastream (HTTP GET on the object DSID) contains a checksum. Saving the checksum at download time and then comparing to the current checksum could act as a mechanism to verify the respository content has not been modified.
+Note: other approaches to prevent write collisions:
+
+* the metadata for a datastream (HTTP GET on the object DSID) contains a checksum. Saving the checksum at download time and then comparing to the checksum on the server at upload could act as a mechanism to verify the respository content has not been modified.
 
 More information on the REST API used above can be found here: https://github.com/discoverygarden/islandora_rest/blob/7.x/README.md
-
 
 #### Specific REST APIs: CWRC Workflow
 
