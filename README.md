@@ -75,7 +75,7 @@ Example REST calls:
 
 ```
 
-##### Downloading Content Psuedocode: given a collection PID, authenticate and download a specified datastream from all items in the collection
+##### Downloading Content Pseudocode: given a collection PID, authenticate and download a specified datastream from all items in the collection
 
 1. Authenticate: creates a token that is passed in as part of subsequent API requests. The user must have `view` access to the collection and all objects within the collection plus Drupal permissions to use the Islandora REST API (https://${SERVER_NAME}/admin/people/permissions): `View Objects` & `View Datastreams`
 
@@ -111,7 +111,7 @@ curl -b token.txt -X GET https://${SERVER_NAME}/islandora/rest/v1/object/${PID}/
 More information on the REST API used above can be found here: https://github.com/discoverygarden/islandora_rest/blob/7.x/README.md
 
 
-##### Updating Content Psuedocode: given an object PID, lock the object, download the specified datastream, process, and then upload the content back to CWRC
+##### Updating Content Pseudocode: given an object PID, lock the object, download the specified datastream, process, and then upload the content back to CWRC
 
 1. Determine how long you will need to process the objects and ask a CWRC admin to set the collection object locking time `/islandora/object/${COLLECTION_ID}/manage/collection ==> Manage lock objects`.
 
