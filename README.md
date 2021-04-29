@@ -24,7 +24,7 @@ An overview of development practices for CWRC-Writer packages:
 
 ### REST APIs
 
-#### General
+#### General: Islandora REST
 CWRC offers a the Islandora REST as a means to interact programatically with repository. This section summerizes the more detailed documentation available here: https://github.com/discoverygarden/islandora_rest/blob/7.x/README.md
 
 Definitions:
@@ -159,9 +159,17 @@ How to access CWRC workflow information - <https://github.com/cwrc/cwrc_workflow
 
 How to access CWRC entities - <https://github.com/cwrc/cwrc_entities>
 
-#### Sepcific REST APIs: Object locking
+#### Specific REST APIs: Object locking
 
 How to lock and unlock and existing object - <https://github.com/echidnacorp/islandora_object_lock>, <https://github.com/echidnacorp/islandora_object_lock/blob/7.x/islandora_object_lock_rest/README.md>
+
+#### Specific REST APIs: Credit Visualization
+
+Lookup credit visualization details: <https://github.com/cwrc/islandora_cwrc_credit_visualization>
+
+#### BagIT Extension
+
+<https://github.com/cwrc/islandora_bagit_extension>
 
 #### Preservation
 
