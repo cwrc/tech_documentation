@@ -83,10 +83,10 @@ Example REST calls:
 curl -X POST -i -H "Content-type: application/json" -c token.txt -b token.txt -X POST https://${SERVER_NAME}/rest/user/login -d '{ "username":"${USERNAME}","password":"${PASSWORD}"}'
 ```
 
-2. define a set of objects (i.e., list of PIDs) to process, for example, lookup objects by ${COLLECTION_PID}. Note: a Solr query is an option to define the set objects; `rows` & `start` can be used for pagination of results plus the JSON response contains `numFound` .
+2. define a set of objects (i.e., list of PIDs) to process, for example, lookup objects by ${COLLECTION_PID}. Note: a Solr query is an option to define the set objects; `rows` & `start` can be used for pagination of results plus the JSON response contains `numFound`. `RELS_EXT_isMemberOfCollection_uri_mt` allows defining the set by a CWRC collection. The `fl` parameter filters the response; remove to see the entire set of Solr fields. The parameter `sort=fgs_label_s+asc` will add a sort to the results. The `fgs_label_s` is a single valued Solr field (multivalued solr fields cannot with the `sort`). There is no Solr field for surname or name field that starts with surname -- one could be added.
 
 ```
-curl -b token.txt -X GET "https://${SERVER_NAME}/islandora/rest/v1/solr/RELS_EXT_isMemberOfCollection_uri_mt:\"${COLLECTION_PID}\"?fl=PID&rows=999999&start=0&wt=json"
+curl -b token.txt -X GET "https://${SERVER_NAME}/islandora/rest/v1/solr/RELS_EXT_isMemberOfCollection_uri_mt:\"${COLLECTION_PID}\"?fl=PID&rows=999999&start=0&wt=json&sort=fgs_label_s+asc"
 ```
 
 3. foreach object (i.e., PID) in step 2, retrieve the associated metadata
@@ -104,12 +104,13 @@ curl -b token.txt -X GET https://${SERVER_NAME}/islandora/rest/v1/object/${PID}
 
 5. request the contents (XML) within the specified datastream ${DSID} attached to the object ${PID}
 
+Note: a download can occur whether or not you or someone else holds a lock on the object (see update content pseudocode for info on the locking mechanism).
+
 ```
 curl -b token.txt -X GET https://${SERVER_NAME}/islandora/rest/v1/object/${PID}/datastream/${DSID}?content=true
 ```
 
 More information on the REST API used above can be found here: https://github.com/discoverygarden/islandora_rest/blob/7.x/README.md
-
 
 ##### Updating Content Pseudocode: given an object PID, lock the object, download the specified datastream, process, and then upload the content back to CWRC
 
@@ -175,7 +176,7 @@ To allow the CWRC-Writer to validate a document against a schema via a web API (
 ### Authentication against APIs
 
 CWRC uses the Drupal "Services" and "Rest Server"
- 
+
 ```
 curl -X POST -i -H "Content-type: application/json" -c cookies.txt -b cookies.txt -X POST http://dev.local/rest/user/login -d '{ "username":"zz","password":"zz"}'
 ```
@@ -220,6 +221,7 @@ Header add Access-Control-Allow-Headers: "Authorization"
         }
 ```
 
+------------------
 
 ## CANARIE
 
@@ -227,9 +229,7 @@ ToDo: elaborate
 
 Circa 2018-2021, [CANARIE](https://science.canarie.ca/researchsoftware/researchresource/main.html?resourceID=146) checks the health of the cwrc.ca site along with gathering usage stats plus housing links to information about the platform in CANARIE platform registry. The information provided to the CANARIE registry is provided by endpoints defined in [cwrc_core_tweaks](https://github.com/cwrc/cwrc_core_tweaks). URL's provided to the CANARIE registry either point to Drupal pages or to redirects such as the [Fact Sheet redirect](https://cwrc.ca/admin/config/search/redirect/edit/57?destination=admin/config/search/redirect/list/fact)
 
-
-
-
+------------------
 
 ## CWRC Repository Drupal modules (all in Git format) as of 2017-07-18
 
