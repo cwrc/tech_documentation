@@ -151,6 +151,59 @@ Note: other approaches to prevent write collisions:
 
 More information on the REST API used above can be found here: https://github.com/discoverygarden/islandora_rest/blob/7.x/README.md
 
+##### Updating Content Pseudocode: given an object PID, lock the object, download the specified datastream, process, and then upload the content back to CWRC
+
+1. Determine how long you will need to process the objects and ask a CWRC admin to set the collection object locking time `/islandora/object/${COLLECTION_ID}/manage/collection ==> Manage lock objects`.
+
+2. Follow the steps in the `Downloading content psuedocode` example above to gather the object contents you wish to process
+
+3. Add to the above steps an API call to lock the object to prevent users from changing the item while you yourself are changing that item (overwriting others work since to original download) [details](https://github.com/echidnacorp/islandora_object_lock/blob/7.x/islandora_object_lock_rest/README.md)
+
+    * Check if lock exists
+        ```
+        curl -b token.txt -X GET https://${SERVER_NAME}/islandora/rest/v1/object/${PID}/lock
+        ```
+    * Aquire lock
+        ```
+        curl -b token.txt -X POST https://${SERVER_NAME}/islandora/rest/v1/object/${PID}/lock
+        ```
+
+4. Process downloaded items
+
+5. Once ready to place items back into the repository, update object datastream in repository (see notes below)
+
+```
+curl -b token.txt -X POST -F "method=PUT" -F "file=@${SOURCE_FILE}" https://${SERVER_NAME}/islandora/rest/v1/object/${PID}/datastream/${DSID}
+```
+
+6. Add workflow information describing the change [details here](https://github.com/cwrc/cwrc_workflow/blob/7.x/README.md) : ask a CWRC admin for the workflow parameters to add via the `activity` parameter
+
+```
+curl -b token.txt -G -X GET "https://${SERVER_NAME}/islandora_workflow_rest/v1/add_workflow" -d PID=${PID} -d activity='{"category":"metadata_contribution","stamp":"orlando:ENH","status":"c","note":"entity"}'
+```
+
+7. Remove lock (if lock exists): `CWRC` datastream will not release the lock an update event like some other datastreams will (details: [exclusion list](https://github.com/cwrc/cwrc_islandora_tweaks/blob/develop/cwrc_islandora_tweaks.module#L190-L199), and CWRC-Writer `save` versus `save and exit` functionality.
+
+```
+curl -b token.txt -X DELETE https://${SERVER_NAME}/islandora/rest/v1/object/${PID}/lock
+```
+
+
+Note: documentation regarding the REST API update: "... mock PUT / DELETE requests as POST requests by adding an additional form-data field method to inform the server which method was actually intended.  At the moment multi-part PUT requests such as the one required to modify an existing datastream's content and properties are not implemented you can mock these PUT requests using aforementioned mechanism.POST and include an additional form-data field method with the value PUT...."
+
+Note: other approaches to prevent write collisions:
+
+* the metadata for a datastream (HTTP GET on the object DSID) contains a checksum. Saving the checksum at download time and then comparing to the checksum on the server at upload could act as a mechanism to verify the respository content has not been modified. Note all object have a checksum
+```
+curl -b token.txt -X GET https://${SERVER_NAME}/islandora/rest/v1/object/${PID}/datastream/${DSID}?content=false
+```
+* use the date on the created version
+```
+curl -b token.txt -X GET https://${SERVER_NAME}/islandora/rest/v1/object/${PID}/datastream/${DSID}?content=false
+```
+
+More information on the REST API used above can be found here: https://github.com/discoverygarden/islandora_rest/blob/7.x/README.md
+
 #### Specific REST APIs: CWRC Workflow
 
 How to access CWRC workflow information - <https://github.com/cwrc/cwrc_workflow>
