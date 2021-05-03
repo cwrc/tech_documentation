@@ -182,7 +182,7 @@ curl -b token.txt -X POST -F "method=PUT" -F "file=@${SOURCE_FILE}" https://${SE
 curl -b token.txt -G -X GET "https://${SERVER_NAME}/islandora_workflow_rest/v1/add_workflow" -d PID=${PID} -d activity='{"category":"metadata_contribution","stamp":"orlando:ENH","status":"c","note":"entity"}'
 ```
 
-7. Remove lock (if lock exists): `CWRC` datastream will not release the lock an update event like some other datastreams will (details: [exclusion list](https://github.com/cwrc/cwrc_islandora_tweaks/blob/develop/cwrc_islandora_tweaks.module#L190-L199), and CWRC-Writer `save` versus `save and exit` functionality.
+7. Remove lock (if lock exists): `CWRC` datastream will not release the lock on an `update` event as is the case with other datastreams will (details: [exclusion list](https://github.com/cwrc/cwrc_islandora_tweaks/blob/develop/cwrc_islandora_tweaks.module#L190-L199), and see the implementation of the CWRC-Writer `save` versus `save and exit` functionality.
 
 ```
 curl -b token.txt -X DELETE https://${SERVER_NAME}/islandora/rest/v1/object/${PID}/lock
