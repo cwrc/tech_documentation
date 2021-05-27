@@ -1,3 +1,5 @@
+More information: https://github.com/cwrc/tech_documentation_private
+
 Dev VM - Compute Canada VM - snapshot of production content (shared Fedora)
 --
 
