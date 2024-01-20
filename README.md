@@ -1,5 +1,30 @@
-# tech_documentation
-Centralized storage for cwrc technical documentation. 
+# Tech Documentation
+
+Centralized storage for cwrc technical documentation covering all projects under the CWRC umbrella. 
+
+## Projects
+
+### CWRC Repository
+
+The CWRC Repository circa 2010-2024 was based on the Islandora Foundation software stack. In 2024, the cWRC REpository migrated to the LEAF software stack based on Islandora 2.0. More technical information can be found in the following Git repository
+* [CWRC Technical Documentation (Private)](https://github.com/cwrc/tech_documentation_private)
+
+Public references to CWRC, LEAF, and the boader Islandora community:
+* [CWRC](https://cwrc.ca/about)
+* [LEAF](https://gitlab.com/calincs/cwrc/leaf/leaf-base-i8)
+* [LEAF Wiki](https://gitlab.com/calincs/cwrc/leaf/leaf-base-i8/-/wikis/home)
+* [Islandora 2.0](https://www.islandora.ca/)
+* [Isle](https://github.com/islandora-Devops/isle-buildkit)
+* [isle-buildkit](https://github.com/islandora-Devops/isle-buildkit)
+* [Isle Site Template](https://github.com/Islandora-Devops/isle-site-template)
+* [Islandora Bagger](https://github.com/mjordan/islandora_bagger)
+* [Isle Bagger](https://github.com/cwrc/isle-bagger)
+* [Islandora ETL](https://github.com/cwrc/islandora-etl)
+* [Islandora Workbench](https://github.com/mjordan/islandora_workbench)
+* [Islandora Slack](https://islandora.slack.com/ssb/redirect)
+* [Islandora Community](https://www.islandora.ca/community)
+* [Islandora Foundation YouTube](https://www.youtube.com/@islandorafoundation9224)
+ 
 
 ### CWRC-Writer
 
