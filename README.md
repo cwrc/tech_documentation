@@ -6,8 +6,15 @@ Centralized storage for cwrc technical documentation covering all projects under
 
 ### CWRC Repository
 
-The CWRC Repository circa 2010-2024 was based on the Islandora Foundation software stack. In 2024, the cWRC REpository migrated to the LEAF software stack based on Islandora 2.0. More technical information can be found in the following Git repository
+The CWRC Repository circa 2010-2024 was based on the Islandora Foundation software stack. In 2024, the CWRC Repository migrated to the LEAF software stack based on Islandora 2.0.
+
+Technical information on the CWRC infrastructer can be found in the following Git repository:
+
 * [CWRC Technical Documentation (Private)](https://github.com/cwrc/tech_documentation_private)
+  * Content summary:
+    *  CWRC infrastructure (circa 2012-2024) using Islandora Legacy software
+    *  CWRC infrastructure (circa 2024/..) using LEAF & Islandora 2.0
+    *  General CWRC infrastructure notes
 
 Public references to CWRC, LEAF, and the boader Islandora community:
 * [CWRC](https://cwrc.ca/about)
