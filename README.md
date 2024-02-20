@@ -12,9 +12,11 @@ Technical information on the CWRC infrastructer can be found in the following Gi
 
 * [CWRC Technical Documentation (Private)](https://github.com/cwrc/tech_documentation_private)
   * Content summary:
-    *  CWRC infrastructure (circa 2012-2024) using Islandora Legacy software
-    *  CWRC infrastructure (circa 2024/..) using LEAF & Islandora 2.0
-    *  General CWRC infrastructure notes
+    * CWRC infrastructure (circa 2012-2024) using Islandora Legacy software
+    * CWRC infrastructure (circa 2024/..) using LEAF & Islandora 2.0
+      * [Technical Documentation (private link)](https://github.com/cwrc/tech_documentation_private/tree/main/cwrc_v2.0)
+      * [VM Provisioning, Configuration & Deployment (private link)](https://github.com/cwrc/cwrc_v2)
+    * General CWRC infrastructure notes
 
 Public references to CWRC, LEAF, and the boader Islandora community:
 * [CWRC](https://cwrc.ca/about)
