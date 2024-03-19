@@ -1,6 +1,38 @@
 # Tech Documentation
 
-Centralized storage for cwrc technical documentation covering all projects under the CWRC umbrella. 
+Centralized storage of the CWRC technical documentation covering all projects under the CWRC umbrella.
+
+## Table of Contents <!-- omit from toc -->
+
+* [Tech Documentation](#tech-documentation)
+  * [Projects](#projects)
+    * [CWRC Repository](#cwrc-repository)
+    * [CWRC-Writer](#cwrc-writer)
+  * [Misc](#misc)
+    * [REST APIs](#rest-apis)
+      * [General: Islandora REST](#general-islandora-rest)
+        * [General strategy (used outside of Drupal e.g., on another server)](#general-strategy-used-outside-of-drupal-eg-on-another-server)
+        * [general usage of the REST API - common calls](#general-usage-of-the-rest-api---common-calls)
+        * [Downloading Content Pseudocode: given a collection PID, authenticate and download a specified datastream from all items in the collection](#downloading-content-pseudocode-given-a-collection-pid-authenticate-and-download-a-specified-datastream-from-all-items-in-the-collection)
+        * [Updating Content Pseudocode: given an object PID, lock the object, download the specified datastream, process, and then upload the content back to CWRC](#updating-content-pseudocode-given-an-object-pid-lock-the-object-download-the-specified-datastream-process-and-then-upload-the-content-back-to-cwrc)
+        * [Updating Content Pseudocode: given an object PID, lock the object, download the specified datastream, process, and then upload the content back to CWRC](#updating-content-pseudocode-given-an-object-pid-lock-the-object-download-the-specified-datastream-process-and-then-upload-the-content-back-to-cwrc-1)
+      * [Specific REST APIs: CWRC Workflow](#specific-rest-apis-cwrc-workflow)
+      * [Specific REST APIs: CWRC Entities](#specific-rest-apis-cwrc-entities)
+      * [Specific REST APIs: Object locking](#specific-rest-apis-object-locking)
+      * [Specific REST APIs: Credit Visualization](#specific-rest-apis-credit-visualization)
+      * [BagIT Extension](#bagit-extension)
+      * [Preservation](#preservation)
+      * [Schema Validation](#schema-validation)
+    * [Authentication against APIs](#authentication-against-apis)
+  * [CANARIE](#canarie)
+  * [CWRC Repository Drupal modules (all in Git format) as of 2017-07-18](#cwrc-repository-drupal-modules-all-in-git-format-as-of-2017-07-18)
+      * [Shared](#shared)
+      * [CWRC modules](#cwrc-modules)
+      * [digitalpage.ca](#digitalpageca)
+      * [modernistcommons.ca](#modernistcommonsca)
+      * [spanishcivilwar.ca](#spanishcivilwarca)
+  * [Odds and ends](#odds-and-ends)
+    * [Handy commands](#handy-commands)
 
 ## Projects
 
@@ -16,9 +48,12 @@ Technical information on the CWRC infrastructer can be found in the following Gi
     * CWRC infrastructure (circa 2024/..) using LEAF & Islandora 2.0
       * [Technical Documentation (private link)](https://github.com/cwrc/tech_documentation_private/tree/main/cwrc_v2.0)
       * [VM Provisioning, Configuration & Deployment (private link)](https://github.com/cwrc/cwrc_v2)
+      * [LEAF](https://gitlab.com/calincs/cwrc/leaf/leaf-base-i8)
+      * [LEAF Wiki](https://gitlab.com/calincs/cwrc/leaf/leaf-base-i8/-/wikis/home)
     * General CWRC infrastructure notes
 
-Public references to CWRC, LEAF, and the boader Islandora community:
+Public references to CWRC, LEAF, and the broader Islandora community:
+
 * [CWRC](https://cwrc.ca/about)
 * [LEAF](https://gitlab.com/calincs/cwrc/leaf/leaf-base-i8)
 * [LEAF Wiki](https://gitlab.com/calincs/cwrc/leaf/leaf-base-i8/-/wikis/home)
@@ -33,11 +68,11 @@ Public references to CWRC, LEAF, and the boader Islandora community:
 * [Islandora Slack](https://islandora.slack.com/ssb/redirect)
 * [Islandora Community](https://www.islandora.ca/community)
 * [Islandora Foundation YouTube](https://www.youtube.com/@islandorafoundation9224)
- 
+
 
 ### CWRC-Writer
 
-There are two main parts to a full CWRC-Writer installation, and each part runs more or less independently: 
+There are two main parts to a full CWRC-Writer installation, and each part runs more or less independently:
 
 CWRC-Writer - The editor itself that runs as javascript in the web browser.
 
@@ -93,7 +128,7 @@ given a {PID}
 // lookup properties of the object via the REST endpoint
 https://${SERVER_NAME}/islandora/rest/v1/object/{PID}
 
-the JSON response contains properties 
+the JSON response contains properties
 
 // lookup content of a specified datastream via the REST endpoint
 `https://${SERVER_NAME}/islandora/rest/v1/object/${PID}/datastream/${DSID}/?content=true`
@@ -262,7 +297,7 @@ Lookup credit visualization details: <https://github.com/cwrc/islandora_cwrc_cre
 
 To allow a preservation system to pull content from the CWRC repository, the following extenstion provides the required REST API's: [BagIt Extension](https://github.com/cwrc/islandora_bagit_extension).
 
-The user needs to have view access to all Fedora objects. If the anonymous uses does not have access, then the REST Login API is required by the preservation client. 
+The user needs to have view access to all Fedora objects. If the anonymous uses does not have access, then the REST Login API is required by the preservation client.
 
 #### Schema Validation
 
