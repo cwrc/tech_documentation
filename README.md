@@ -26,11 +26,11 @@ Centralized storage of the CWRC technical documentation covering all projects un
     * [Authentication against APIs](#authentication-against-apis)
   * [CANARIE](#canarie)
   * [CWRC Repository Drupal modules (all in Git format) as of 2017-07-18](#cwrc-repository-drupal-modules-all-in-git-format-as-of-2017-07-18)
-      * [Shared](#shared)
-      * [CWRC modules](#cwrc-modules)
-      * [digitalpage.ca](#digitalpageca)
-      * [modernistcommons.ca](#modernistcommonsca)
-      * [spanishcivilwar.ca](#spanishcivilwarca)
+    * [Shared](#shared)
+    * [CWRC modules](#cwrc-modules)
+    * [digitalpage.ca](#digitalpageca)
+    * [modernistcommons.ca](#modernistcommonsca)
+    * [spanishcivilwar.ca](#spanishcivilwarca)
   * [Odds and ends](#odds-and-ends)
     * [Handy commands](#handy-commands)
 
@@ -40,17 +40,18 @@ Centralized storage of the CWRC technical documentation covering all projects un
 
 The CWRC Repository circa 2010-2024 was based on the Islandora Foundation software stack. In 2024, the CWRC Repository migrated to the LEAF software stack based on Islandora 2.0.
 
-Technical information on the CWRC infrastructer can be found in the following Git repository:
+Technical information on the CWRC infrastructure can be found in the following Git repository:
 
-* [CWRC Technical Documentation (Private)](https://github.com/cwrc/tech_documentation_private)
-  * Content summary:
-    * CWRC infrastructure (circa 2012-2024) using Islandora Legacy software
-    * CWRC infrastructure (circa 2024/..) using LEAF & Islandora 2.0
-      * [Technical Documentation (private link)](https://github.com/cwrc/tech_documentation_private/tree/main/cwrc_v2.0)
-      * [VM Provisioning, Configuration & Deployment (private link)](https://github.com/cwrc/cwrc_v2)
-      * [LEAF](https://gitlab.com/calincs/cwrc/leaf/leaf-base-i8)
-      * [LEAF Wiki](https://gitlab.com/calincs/cwrc/leaf/leaf-base-i8/-/wikis/home)
-    * General CWRC infrastructure notes
+* CWRC infrastructure (circa 2012-2024) using Islandora Legacy software
+  * [Repository v1 Technical Documentation (private link)](https://github.com/cwrc/tech_documentation_private/tree/main/cwrc_v1.0)
+* CWRC infrastructure (circa 2024/..) using LEAF & Islandora 2.0
+  * [Repository v2 Technical Documentation (private link)](https://github.com/cwrc/tech_documentation_private/tree/main/cwrc_v2.0)
+  * [VM Provisioning, Configuration & Deployment (private link)](https://github.com/cwrc/cwrc_v2)
+  * [LEAF](https://gitlab.com/calincs/cwrc/leaf/leaf-base-i8)
+  * [LEAF Wiki](https://gitlab.com/calincs/cwrc/leaf/leaf-base-i8/-/wikis/home)
+* General CWRC infrastructure notes
+  * This document
+  * [CWRC Technical Documentation (Private)](https://github.com/cwrc/tech_documentation_private)
 
 Public references to CWRC, LEAF, and the broader Islandora community:
 
@@ -364,7 +365,7 @@ Circa 2018-2021, [CANARIE](https://science.canarie.ca/researchsoftware/researchr
 ## CWRC Repository Drupal modules (all in Git format) as of 2017-07-18
 
 
-#### Shared
+### Shared
 
 * [all/libraries/CWRC-Dialogs](https://github.com/cwrc/CWRC-Dialogs)
 * [all/libraries/CWRC-Mapping-Timelines-Project](https://github.com/cwrc/CWRC-Mapping-Timelines-Project)
@@ -441,7 +442,7 @@ Circa 2018-2021, [CANARIE](https://science.canarie.ca/researchsoftware/researchr
 * [all/vendor/symfony/event-dispatcher]()
 
 
-#### CWRC modules
+### CWRC modules
 
 * [default/libraries/CWRC-Mapping-Timelines-Project](https://github.com/cwrc/CWRC-Mapping-Timelines-Project)
 * [default/libraries/CWRC-Writer](https://github.com/cwrc/CWRC-Writer)
@@ -499,11 +500,11 @@ Circa 2018-2021, [CANARIE](https://science.canarie.ca/researchsoftware/researchr
 * [default/modules/islandora_plotit](https://github.com/cwrc/islandora_plotit)
 * [default/modules/islandora_xslt_paths ???](https://github.com/cwrc/islandora_xslt_paths)
 
-#### digitalpage.ca
+### digitalpage.ca
 
 * [digitalpage.ca/modules/islandora_digitalus-7.x-1.4](https://Semandra@bitbucket.org/Semandra/islandora-digitalus.git)
 
-#### modernistcommons.ca
+### modernistcommons.ca
 
 * [modernistcommons.ca/libraries/CWRC-Writer](https://github.com/discoverygarden/CWRC-Writer)
 * [modernistcommons.ca/modules/agile_fonds_importer](https://github.com/agile-humanities/agile_fonds_importer)
@@ -551,13 +552,14 @@ Circa 2018-2021, [CANARIE](https://science.canarie.ca/researchsoftware/researchr
 * [modernistcommons.ca/modules/islandora_xacml_editor](https://github.com/agile-humanities/islandora_xacml_editor)
 * [modernistcommons.ca/themes/emic-theme](https://github.com/discoverygarden/emic-theme)
 
-#### spanishcivilwar.ca
+### spanishcivilwar.ca
 
 * [spanishcivilwar.ca/themes/mounta-civil-theme](https://github.com/echidnacorp/mounta-civil-theme)
 
 
 
 ## Odds and ends
+
 ### Handy commands
 
 To find readme files
