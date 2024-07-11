@@ -50,8 +50,9 @@ Technical information on the CWRC infrastructure can be found in the following G
   * [LEAF](https://gitlab.com/calincs/cwrc/leaf/leaf-base-i8)
   * [LEAF Wiki](https://gitlab.com/calincs/cwrc/leaf/leaf-base-i8/-/wikis/home)
 * General CWRC infrastructure notes
-  * This document
   * [CWRC Technical Documentation (Private)](https://github.com/cwrc/tech_documentation_private)
+  * [CWRC Repository v2 image builder)](https://github.com/cwrc/cwrc_leaf_builder)
+  * The rest of this document
 
 Public references to CWRC, LEAF, and the broader Islandora community:
 
